@@ -253,4 +253,19 @@
 	[accountsWindow orderOut:sender];
 }
 
+- (IBAction) openUsersWindow:(id)sender
+{
+	[NSApp beginSheet:usersWindow
+	   modalForWindow:window
+		modalDelegate:nil
+	   didEndSelector:NULL
+		  contextInfo:NULL];	
+}
+
+-(IBAction) closeUsersWindow:(id)sender
+{
+	[NSApp endSheet:usersWindow];
+	[usersWindow orderOut:sender];	
+}
+
 @end

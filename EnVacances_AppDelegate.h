@@ -23,6 +23,8 @@
 	IBOutlet NSWindow *accountsWindow;
 	IBOutlet NSTextField *accountsField;
 	NSNumber *accounts;
+	
+	IBOutlet NSWindow *usersWindow;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow *window;
@@ -36,6 +38,10 @@
 // Non-generated code
 - (IBAction) openAccountsWindow:(id)sender;
 - (IBAction) closeAccountsWindow:(id)sender;
+
+- (IBAction) openUsersWindow:(id)sender;
+- (IBAction) closeUsersWindow:(id)sender;
+
 - (void) makeAccounts;
 
 @property(assign) NSNumber *accounts;
