@@ -210,30 +210,53 @@
 
 
 // Non-generated code
-@synthesize accounts;
+@synthesize totalExpenses;
+@synthesize totalStayDurations;
 
 - (void) makeAccounts
 {
-	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Expense"
-											  inManagedObjectContext:managedObjectContext];
-	NSError *error = nil;
-	[request setEntity:entity];
+	// Setting total expenses
+	NSFetchRequest *expenseRequest = [[[NSFetchRequest alloc] init] autorelease];
+	NSEntityDescription *expenseEntity = [NSEntityDescription entityForName:@"Expense"
+													 inManagedObjectContext:managedObjectContext];
+	NSError *expenseError = nil;
 
+	[expenseRequest setEntity:expenseEntity];	
+	NSArray *expensesArray = [managedObjectContext executeFetchRequest:expenseRequest error:&expenseError];
 	
-	NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
-	
-	NSDecimalNumber *sum = nil;
-	for (NSDictionary * dictionary in array) {
-        NSDecimalNumber *amount = (NSDecimalNumber *) [dictionary valueForKey:@"amount"];
-        if (!sum) {
-			sum = amount;
+	NSDecimalNumber *amountsSum = nil;
+	for (NSDictionary *expensesDictionary in expensesArray) {
+        NSDecimalNumber *amount = (NSDecimalNumber *) [expensesDictionary valueForKey:@"amount"];
+        if (!amountsSum) {
+			amountsSum = amount;
         } else {
-			sum = [sum decimalNumberByAdding:amount];
+			amountsSum = [amountsSum decimalNumberByAdding:amount];
         }
 	}
-
-	[accountsField setFloatValue:[sum floatValue]];
+	
+	totalExpenses = amountsSum;
+	[totalExpensesField setFloatValue: [totalExpenses floatValue]];
+	
+	// Setting total user days
+	NSFetchRequest *userRequest = [[[NSFetchRequest alloc] init] autorelease];
+	NSEntityDescription *userEntity = [NSEntityDescription entityForName:@"User"
+												  inManagedObjectContext:managedObjectContext];
+	NSError *userError = nil;
+	[userRequest setEntity:userEntity];	
+	NSArray *usersArray = [managedObjectContext executeFetchRequest:userRequest error:&userError];
+	
+	int stayDurationsSum = 0;
+	for (NSDictionary *usersDictionary in usersArray) {
+		int stayDuration = [[usersDictionary valueForKey:@"stayDuration"] intValue];
+        if (stayDurationsSum == 0) {
+			stayDurationsSum = stayDuration;
+        } else {
+			stayDurationsSum = stayDurationsSum + stayDuration;
+        }
+	}
+	
+	[totalStayDurations initWithInt: stayDurationsSum];
+	[totalStayDurationsField setIntValue:stayDurationsSum];
 }
 
 - (IBAction) openAccountsWindow:(id)sender

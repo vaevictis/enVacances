@@ -21,8 +21,10 @@
 	IBOutlet NSButton *closeAccountsWindow;
 
 	IBOutlet NSWindow *accountsWindow;
-	IBOutlet NSTextField *accountsField;
-	NSNumber *accounts;
+	IBOutlet NSTextField *totalExpensesField;
+	IBOutlet NSTextField *totalStayDurationsField;
+	NSNumber *totalExpenses;
+	NSNumber *totalStayDurations;
 	
 	IBOutlet NSWindow *usersWindow;
 }
@@ -44,6 +46,7 @@
 
 - (void) makeAccounts;
 
-@property(assign) NSNumber *accounts;
+@property(assign) NSNumber *totalExpenses;
+@property(assign) NSNumber *totalStayDurations;
 
 @end
