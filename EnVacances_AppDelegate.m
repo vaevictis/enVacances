@@ -215,14 +215,15 @@
 
 - (void) makeAccounts
 {
+	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+	NSError *error = nil;
+
 	// Setting total expenses
-	NSFetchRequest *expenseRequest = [[[NSFetchRequest alloc] init] autorelease];
 	NSEntityDescription *expenseEntity = [NSEntityDescription entityForName:@"Expense"
 													 inManagedObjectContext:managedObjectContext];
-	NSError *expenseError = nil;
 
-	[expenseRequest setEntity:expenseEntity];	
-	NSArray *expensesArray = [managedObjectContext executeFetchRequest:expenseRequest error:&expenseError];
+	[request setEntity:expenseEntity];	
+	NSArray *expensesArray = [managedObjectContext executeFetchRequest:request error:&error];
 	
 	NSDecimalNumber *amountsSum = nil;
 	for (NSDictionary *expensesDictionary in expensesArray) {
@@ -235,28 +236,28 @@
 	}
 	
 	totalExpenses = amountsSum;
-	[totalExpensesField setFloatValue: [totalExpenses floatValue]];
 	
 	// Setting total user days
-	NSFetchRequest *userRequest = [[[NSFetchRequest alloc] init] autorelease];
 	NSEntityDescription *userEntity = [NSEntityDescription entityForName:@"User"
 												  inManagedObjectContext:managedObjectContext];
-	NSError *userError = nil;
-	[userRequest setEntity:userEntity];	
-	NSArray *usersArray = [managedObjectContext executeFetchRequest:userRequest error:&userError];
+	[request setEntity:userEntity];	
+	NSArray *usersArray = [managedObjectContext executeFetchRequest:request error:&error];
 	
 	int stayDurationsSum = 0;
 	for (NSDictionary *usersDictionary in usersArray) {
 		int stayDuration = [[usersDictionary valueForKey:@"stayDuration"] intValue];
-        if (stayDurationsSum == 0) {
-			stayDurationsSum = stayDuration;
-        } else {
-			stayDurationsSum = stayDurationsSum + stayDuration;
-        }
+		stayDurationsSum = stayDurationsSum + stayDuration;
 	}
+
+	totalStayDurations = [NSNumber numberWithInt:stayDurationsSum];
 	
-	[totalStayDurations initWithInt: stayDurationsSum];
-	[totalStayDurationsField setIntValue:stayDurationsSum];
+	// Setting interface elements
+	[totalExpensesField setFloatValue: [totalExpenses floatValue]];
+	[totalStayDurationsField setIntValue: [totalStayDurations intValue]];
+	
+	// Computing the daily cost
+	float dailyCost = [amountsSum floatValue] / stayDurationsSum;
+	[dailyCostField setFloatValue:dailyCost];
 }
 
 - (IBAction) openAccountsWindow:(id)sender

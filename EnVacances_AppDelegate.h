@@ -23,6 +23,7 @@
 	IBOutlet NSWindow *accountsWindow;
 	IBOutlet NSTextField *totalExpensesField;
 	IBOutlet NSTextField *totalStayDurationsField;
+	IBOutlet NSTextField *dailyCostField;
 	NSNumber *totalExpenses;
 	NSNumber *totalStayDurations;
 	
@@ -48,5 +49,6 @@
 
 @property(assign) NSNumber *totalExpenses;
 @property(assign) NSNumber *totalStayDurations;
+@property(assign) NSNumber *dailyCost;
 
 @end
