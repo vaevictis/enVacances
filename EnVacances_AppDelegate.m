@@ -212,6 +212,7 @@
 // Non-generated code
 @synthesize totalExpenses;
 @synthesize totalStayDurations;
+@synthesize dailyCost;
 
 - (void) makeAccounts
 {
@@ -244,20 +245,45 @@
 	NSArray *usersArray = [managedObjectContext executeFetchRequest:request error:&error];
 	
 	int stayDurationsSum = 0;
-	for (NSDictionary *usersDictionary in usersArray) {
-		int stayDuration = [[usersDictionary valueForKey:@"stayDuration"] intValue];
+	for (NSDictionary *userDictionary in usersArray) {
+		int stayDuration = [[userDictionary valueForKey:@"stayDuration"] intValue];
 		stayDurationsSum = stayDurationsSum + stayDuration;
 	}
 
 	totalStayDurations = [NSNumber numberWithInt:stayDurationsSum];
-	
+
 	// Setting interface elements
 	[totalExpensesField setFloatValue: [totalExpenses floatValue]];
 	[totalStayDurationsField setIntValue: [totalStayDurations intValue]];
 	
 	// Computing the daily cost
-	float dailyCost = [amountsSum floatValue] / stayDurationsSum;
-	[dailyCostField setFloatValue:dailyCost];
+	dailyCost = [NSNumber numberWithFloat:[amountsSum floatValue] / stayDurationsSum];
+	[dailyCostField setFloatValue:[dailyCost floatValue]];
+	
+	// Computing balance
+	for (NSManagedObject *user in [usersArray objectEnumerator]) {
+		NSString *name = [user valueForKey:@"name"];
+		NSLog(@"user name: %@", name);
+		
+		NSArray *expensesArray = [user valueForKey:@"expenses"];
+		float totalUserAmount = 0.0;
+		for (NSManagedObject *expense in [expensesArray objectEnumerator]) {
+			float expenseAmount = [[expense valueForKey:@"amount"] floatValue];
+			NSLog(@"expense amount: %f", expenseAmount);
+			
+			totalUserAmount = totalUserAmount + expenseAmount;
+			NSLog(@"intermediate total amount : %f", totalUserAmount);		
+		}
+
+		NSLog(@"total amount: %f", totalUserAmount);
+		
+		float balance = totalUserAmount - [dailyCost floatValue] * [[user valueForKey:@"stayDuration"] floatValue];
+		NSLog(@"balance: %f", balance);
+		NSNumber *userBalance = [NSNumber numberWithFloat:balance];
+		[user setValue:userBalance 
+				forKey:@"balance"];
+		NSLog(@"balance fetchée: %@", [user valueForKey:@"balance"]);
+	}
 }
 
 - (IBAction) openAccountsWindow:(id)sender
