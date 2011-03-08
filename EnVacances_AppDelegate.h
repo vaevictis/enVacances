@@ -26,6 +26,7 @@
 	IBOutlet NSTextField *dailyCostField;
 	NSNumber *totalExpenses;
 	NSNumber *totalStayDurations;
+	NSNumber *dailyCost;
 	
 	IBOutlet NSWindow *usersWindow;
 }
