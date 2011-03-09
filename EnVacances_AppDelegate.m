@@ -215,7 +215,6 @@
 @synthesize dailyCost;
 
 - (IBAction) makeAccounts:(id)sender{
-	NSLog(@"gonna call 'computeBalance'");
 	[self computeBalance];
 }
 
@@ -268,26 +267,20 @@
 	// Computing balance
 	for (NSManagedObject *user in [usersArray objectEnumerator]) {
 		NSString *name = [user valueForKey:@"name"];
-		NSLog(@"user name: %@", name);
 		
 		NSArray *expensesArray = [user valueForKey:@"expenses"];
 		float totalUserAmount = 0.0;
 		for (NSManagedObject *expense in [expensesArray objectEnumerator]) {
 			float expenseAmount = [[expense valueForKey:@"amount"] floatValue];
-			NSLog(@"expense amount: %f", expenseAmount);
 			
 			totalUserAmount = totalUserAmount + expenseAmount;
-			NSLog(@"intermediate total amount : %f", totalUserAmount);		
 		}
 
-		NSLog(@"total amount: %f", totalUserAmount);
 		
 		float balance = totalUserAmount - [dailyCost floatValue] * [[user valueForKey:@"stayDuration"] floatValue];
-		NSLog(@"balance: %f", balance);
 		NSNumber *userBalance = [NSNumber numberWithFloat:balance];
 		[user setValue:userBalance 
 				forKey:@"balance"];
-		NSLog(@"balance fetchée: %@", [user valueForKey:@"balance"]);
 	}
 }
 
