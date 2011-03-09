@@ -13,7 +13,7 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		9D4FEA14131AA88B00A4ABF5 /* EnVacances_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4FEA13131AA88B00A4ABF5 /* EnVacances_AppDelegate.m */; };
-		9DB68A8813264A8300E46BF9 /* HouseArchigraphs.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9DB68A8713264A8300E46BF9 /* HouseArchigraphs.icns */; };
+		9DF3909A1326DFA900AF8176 /* sushi-mix-orange.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9DF390991326DFA900AF8176 /* sushi-mix-orange.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,9 +28,9 @@
 		77C82804067257F0000B614F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		77C8280B06725ACE000B614F /* EnVacances_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnVacances_AppDelegate.h; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* EnVacances-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "EnVacances-Info.plist"; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* EnVacances.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnVacances.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D4FEA13131AA88B00A4ABF5 /* EnVacances_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnVacances_AppDelegate.m; sourceTree = "<group>"; };
-		9DB68A8713264A8300E46BF9 /* HouseArchigraphs.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = HouseArchigraphs.icns; sourceTree = "<group>"; };
+		9DF390821326DEB900AF8176 /* EnVacances.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnVacances.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DF390991326DFA900AF8176 /* sushi-mix-orange.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "sushi-mix-orange.icns"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* EnVacances.app */,
+				9DF390821326DEB900AF8176 /* EnVacances.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,7 +83,7 @@
 		29B97314FDCFA39411CA2CEA /* EnVacances */ = {
 			isa = PBXGroup;
 			children = (
-				9DB68A8713264A8300E46BF9 /* HouseArchigraphs.icns */,
+				9DF390991326DFA900AF8176 /* sushi-mix-orange.icns */,
 				7756732906782D8800D1FEB8 /* Models */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -148,7 +148,7 @@
 			name = EnVacances;
 			productInstallPath = "$(HOME)/Applications";
 			productName = EnVacances;
-			productReference = 8D1107320486CEB800E47090 /* EnVacances.app */;
+			productReference = 9DF390821326DEB900AF8176 /* EnVacances.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -182,7 +182,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				2F7446990DB6B7EA00F9684A /* MainMenu.xib in Resources */,
-				9DB68A8813264A8300E46BF9 /* HouseArchigraphs.icns in Resources */,
+				9DF3909A1326DFA900AF8176 /* sushi-mix-orange.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
