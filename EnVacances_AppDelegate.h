@@ -17,18 +17,12 @@
     NSManagedObjectContext *managedObjectContext;
 	
 	// Non-generated code
-	IBOutlet NSButton *openAccountsWindow;
-	IBOutlet NSButton *closeAccountsWindow;
-
-	IBOutlet NSWindow *accountsWindow;
 	IBOutlet NSTextField *totalExpensesField;
 	IBOutlet NSTextField *totalStayDurationsField;
 	IBOutlet NSTextField *dailyCostField;
 	NSNumber *totalExpenses;
 	NSNumber *totalStayDurations;
 	NSNumber *dailyCost;
-	
-	IBOutlet NSWindow *usersWindow;
 }
 
 @property (nonatomic, retain) IBOutlet NSWindow *window;
@@ -40,13 +34,8 @@
 - (IBAction)saveAction:sender;
 
 // Non-generated code
-- (IBAction) openAccountsWindow:(id)sender;
-- (IBAction) closeAccountsWindow:(id)sender;
-
-- (IBAction) openUsersWindow:(id)sender;
-- (IBAction) closeUsersWindow:(id)sender;
-
-- (void) makeAccounts;
+- (IBAction) makeAccounts:(id)sender;
+- (void) computeBalance;
 
 @property(assign) NSNumber *totalExpenses;
 @property(assign) NSNumber *totalStayDurations;

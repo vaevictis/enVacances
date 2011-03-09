@@ -214,7 +214,12 @@
 @synthesize totalStayDurations;
 @synthesize dailyCost;
 
-- (void) makeAccounts
+- (IBAction) makeAccounts:(id)sender{
+	NSLog(@"gonna call 'computeBalance'");
+	[self computeBalance];
+}
+
+- (void) computeBalance
 {
 	NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
 	NSError *error = nil;
@@ -284,38 +289,6 @@
 				forKey:@"balance"];
 		NSLog(@"balance fetchée: %@", [user valueForKey:@"balance"]);
 	}
-}
-
-- (IBAction) openAccountsWindow:(id)sender
-{
-	[NSApp beginSheet:accountsWindow
-	   modalForWindow:window
-		modalDelegate:nil
-	   didEndSelector:NULL
-		  contextInfo:NULL];
-	
-	[self makeAccounts];
-}
-
-- (IBAction) closeAccountsWindow:(id)sender
-{
-	[NSApp endSheet:accountsWindow];
-	[accountsWindow orderOut:sender];
-}
-
-- (IBAction) openUsersWindow:(id)sender
-{
-	[NSApp beginSheet:usersWindow
-	   modalForWindow:window
-		modalDelegate:nil
-	   didEndSelector:NULL
-		  contextInfo:NULL];	
-}
-
--(IBAction) closeUsersWindow:(id)sender
-{
-	[NSApp endSheet:usersWindow];
-	[usersWindow orderOut:sender];	
 }
 
 @end
